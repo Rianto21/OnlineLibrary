@@ -1,0 +1,71 @@
+﻿@model IEnumerable<OnlineLibrary.Models.Books>
+
+@{
+    ViewData["Title"] = "Daftar Buku";
+}
+
+<h1>Daftar Buku</h1>
+
+<p>
+    <a asp-action="Create">Tambah Data</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model._id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Judul)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TanggalTerbit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Kategori)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Penulis)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.JumlahHalaman)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StatusKetersediaan)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item._id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Judul)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TanggalTerbit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Kategori)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Penulis)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JumlahHalaman)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StatusKetersediaan)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
