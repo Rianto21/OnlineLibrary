@@ -21,12 +21,6 @@ namespace OnlineLibrary.Controllers
             return View(_context.GetAllBooks());
         }
 
-        // GET: BooksController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
         // GET: BooksController/Create
         public IActionResult Create()
         {
@@ -54,6 +48,25 @@ namespace OnlineLibrary.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet]
+        public IActionResult Details(string judul)
+        {
+            var data = _context.GetBookDetails(judul);
+            return View(data);
+        }
+
+        [HttpGet]
+        public IActionResult Delete(string judul)
+        {
+            var data = _context.GetBookDetails(judul);
+            return View(data);
+        }
+        [HttpPost]
+        public IActionResult DeleteBooks(string judul)
+        {
+            _context.delete(judul);
+            return RedirectToAction("Index");
+        }
 
     }
 }

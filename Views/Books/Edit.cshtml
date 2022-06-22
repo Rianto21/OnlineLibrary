@@ -1,0 +1,63 @@
+﻿@model OnlineLibrary.Models.Books
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Books</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EditBooks">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="_id" class="control-label"></label>
+                <input asp-for="_id" class="form-control" />
+                <span asp-validation-for="_id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Judul" class="control-label"></label>
+                <input asp-for="Judul" class="form-control" />
+                <span asp-validation-for="Judul" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TanggalTerbit" class="control-label"></label>
+                <input asp-for="TanggalTerbit" class="form-control" />
+                <span asp-validation-for="TanggalTerbit" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Kategori" class="control-label"></label>
+                <input asp-for="Kategori" class="form-control" />
+                <span asp-validation-for="Kategori" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Penulis" class="control-label"></label>
+                <input asp-for="Penulis" class="form-control" />
+                <span asp-validation-for="Penulis" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="JumlahHalaman" class="control-label"></label>
+                <input asp-for="JumlahHalaman" class="form-control" />
+                <span asp-validation-for="JumlahHalaman" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="StatusKetersediaan" /> @Html.DisplayNameFor(model => model.StatusKetersediaan)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

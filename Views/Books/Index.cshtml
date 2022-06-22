@@ -7,9 +7,9 @@
 <h1>Daftar Buku</h1>
 
 <p>
-    <a asp-action="Create">Tambah Data</a>
+    <a asp-action="Create" style="text-decoration: none;"><i class="bi bi-plus-square text-success"></i> TAMBAH BUKU</a>
 </p>
-<table class="table">
+@*<table class="table">
     <thead>
         <tr>
             <th>
@@ -35,15 +35,48 @@
             </th>
             <th></th>
         </tr>
-    </thead>
-    <tbody>
+    </thead>*@
+    
+    <div class="container-fluid">
+        <div class="row row-cols-lg-4">
+            
+     
 @foreach (var item in Model) {
-        <tr>
+            <div class="col">
+                <div class="card" style="width: 18rem;">
+                  <img src="https://media.suara.com/pictures/970x544/2022/01/05/18169-ilustrasi-buku-atomic-habits.jpg" class="card-img-top" alt="">
+                  <div class="card-body">
+                    <h5 class="card-title">@Html.DisplayFor(modelItem => item.Judul)</h5>
+                        <p class="card-text">
+                            @Html.DisplayFor(modelItem => item.Kategori)<br>
+                            @Html.DisplayFor(modelItem => item.StatusKetersediaan)
+                        </p>
+                    <div class="row">
+                        <a href="#" class="btn btn-primary col-6">Go somewhere</a>
+                        <div class="btn-group col-6" role="group" aria-label="Basic outlined example">
+                          @*<button onclick='@Html.ActionLink("Edit", "Edit", new { judul = item.Judul, id = item._id  })' type="button" class="btn btn-outline-primary">
+                            <i class="bi bi-pencil-square"></i>
+                          </button>*@
+                          <i class="bi bi-pencil-square"></i>
+                          @Html.ActionLink(" ", "Edit", null, new { @class="bi bi-pencil-square" })
+                          <button onclick='@Html.ActionLink("Details", "Details", new { judul = item.Judul, id = item._id  })' type="button" class="btn btn-outline-primary">
+                              <i class="bi bi-book"></i>
+                          </button>
+                          @*<button onclick='@Html.ActionLink("Delete", "Delete", new { judul = item.Judul, id = item._id  })' type="button" class="btn btn-outline-primary">
+                              <i class="bi bi-trash3" style="color: red"></i>
+                          </button>*@
+                        </div>
+                    </div>
+                    
+                  </div>
+                </div>
+            </div>
+        @*<tr>
             <td>
                 @Html.DisplayFor(modelItem => item._id)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Judul)
+                
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TanggalTerbit)
@@ -61,11 +94,11 @@
                 @Html.DisplayFor(modelItem => item.StatusKetersediaan)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.ActionLink("Edit", "Edit", new { judul = item.Judul, id = item._id  }) |
+                @Html.ActionLink("Details", "Details", new { judul = item.Judul, id = item._id  }) |
+                @Html.ActionLink("Delete", "Delete", new { judul = item.Judul, id = item._id  })
             </td>
-        </tr>
-}
-    </tbody>
-</table>
+        </tr>*@
+}       </div>
+    </div>
+@*</table>*@
