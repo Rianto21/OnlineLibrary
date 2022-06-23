@@ -41,10 +41,10 @@
             @Html.DisplayFor(model => model.Penulis)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.JumlahHalaman)
+            @Html.DisplayNameFor(model => model.Penerbit)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.JumlahHalaman)
+            @Html.DisplayFor(model => model.Penerbit)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.StatusKetersediaan)
@@ -55,6 +55,6 @@
     </dl>
 </div>
 <div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Edit", "Edit", new {  judul = Model.Judul}) |
     <a asp-action="Index">Back to List</a>
 </div>

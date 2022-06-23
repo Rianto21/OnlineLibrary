@@ -3,20 +3,31 @@ using OnlineLibrary.Data;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.DependencyInjection;
 using OnlineLibrary.Interfaces;
+using OnlineLibrary.Models;
 //using MongoBookStoreApp.Contracts;
 //using OnlineLibrary.Models;
 
 var builder = WebApplication.CreateBuilder(args);
+var settings = builder.Configuration.GetSection(nameof(Settings)).Get<Settings>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
-builder.Services.AddScoped<IBooks, BooksDBContext>(); 
+builder.Services.AddScoped<IBooks, BooksDBContext>();
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.Cookie.Name = "Login";
+    options.IdleTimeout = TimeSpan.FromMinutes(5);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+
 
 //builder.Services.AddDbContext<Settings>();
 //builder.Services.AddSingleton<OnlineLibraryDatabaseSettings>();
 
-var settings = builder.Configuration.GetConnectionString("MongoDB.ConnectionString");
+
 
 
 var app = builder.Build();
@@ -36,6 +47,8 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+
+app.UseSession();
 
 app.MapControllerRoute(
     name: "default",

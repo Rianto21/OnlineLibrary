@@ -41,7 +41,7 @@ namespace OnlineLibrary.Data
                 .Set("Kategori", book.Kategori)
                 .Set("TanggalTerbit", book.TanggalTerbit)
                 .Set("Judul", book.Judul)
-                .Set("JumlahHalaman", book.JumlahHalaman);
+                .Set("Penerbit", book.Penerbit);
             BooksCollection.UpdateOne(Filter, Update);
         }
 
