@@ -8,8 +8,9 @@ namespace OnlineLibrary.Interfaces
         IMongoCollection<Users> UsersCollection { get; }
         Users GetUserDetails(string NIS);
         Users UserLogin(string NIS, string password);
+        string[] showuserbookorder(string NIS);
         void Register(Users user);
         void update(string NIS, Users book);
-        void userorderbooks(string NIS, string BookId);
+        void userorderbooks(string NIS, string RentBookId);
     }
 }

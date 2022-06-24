@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<OnlineLibrary.Models.Books>
+@using Microsoft.AspNetCore.Http;
 
 @{
     ViewData["Title"] = "Daftar Buku";
@@ -8,6 +9,7 @@
 
 <p>
     <a asp-action="Create" style="text-decoration: none;"><i class="bi bi-plus-square text-success"></i> TAMBAH BUKU</a>
+    
 </p>
 @*<table class="table">
     <thead>
@@ -37,40 +39,60 @@
         </tr>
     </thead>*@
     
-    <div class="container-fluid">
-        <div class="row row-cols-lg-4">
+    <div class="container-fluid ">
+        <div class="row row-cols-lg-4" style="height: 22rem;">
+    
+    @{
+        int count = 0;
+    }
+
+@foreach (var item in Model)
+{
+    if (count > 1 && count % 4 == 0)
+        {
+            @:</div><div class="row row-cols-lg-4 mt-3" style="height: 22rem;">
             
-     
-@foreach (var item in Model) {
-            <div class="col">
-                <div class="card" style="width: 18rem;">
-                  <img src="https://media.suara.com/pictures/970x544/2022/01/05/18169-ilustrasi-buku-atomic-habits.jpg" class="card-img-top" alt="">
-                  <div class="card-body">
-                    <h5 class="card-title">@Html.DisplayFor(modelItem => item.Judul)</h5>
-                        <p class="card-text">
-                            @Html.DisplayFor(modelItem => item.Kategori)<br>
-                            @Html.DisplayFor(modelItem => item.StatusKetersediaan)
-                        </p>
-                    <div class="row">
-                        <a href="#" class="btn btn-primary col-6">Go somewhere</a>
-                        <div class="btn-group col-6" role="group" aria-label="Basic outlined example">
-                          @*<button onclick='@Html.ActionLink("Edit", "Edit", new { judul = item.Judul, id = item._id  })' type="button" class="btn btn-outline-primary">
-                            <i class="bi bi-pencil-square"></i>
-                          </button>*@
-                          <i class="bi bi-pencil-square"></i>
-                          @Html.ActionLink(" ", "Edit", null, new { @class="bi bi-pencil-square" })
-                          <button onclick='@Html.ActionLink("Details", "Details", new { judul = item.Judul, id = item._id  })' type="button" class="btn btn-outline-primary">
-                              <i class="bi bi-book"></i>
-                          </button>
-                          @*<button onclick='@Html.ActionLink("Delete", "Delete", new { judul = item.Judul, id = item._id  })' type="button" class="btn btn-outline-primary">
-                              <i class="bi bi-trash3" style="color: red"></i>
-                          </button>*@
-                        </div>
-                    </div>
+        }
+        count = count + 1;  
+        <div class="col h-100">
+            <div class="card m-auto w-100 h-100" @*style="width: 18rem;"*@>
+                <img src="https://media.suara.com/pictures/970x544/2022/01/05/18169-ilustrasi-buku-atomic-habits.jpg" class="card-img-top" alt="">
+                <div class="card-body">
+                <h5 class="card-title">
+                        @if(item.Judul.Length <= 36)
+                        {
+                            @Html.DisplayFor(modelItem => item.Judul)
+                        }else{
+                            var x = item.Judul.Substring(0, 36)+"...";
+         
+                            <p>@x</p>
+                        }
+                        </h5>
+                    <p class="card-text">
+                        @Html.DisplayFor(modelItem => item.Kategori)<br>
+                        @if(item.StatusKetersediaan){
+                            <input class="form-check-input" type="checkbox" id="status" checked disabled/> 
+                            <label class="form-check-label" for="status">Status Ketersediaan</label>
+                        }else{
+                            <input class="form-check-input" type="checkbox" id="status" disabled/> 
+                            <label class="form-check-label" for="status">Status Ketersediaan</label>
+                        }
+                    </p>
+                <div class="row w-100 justify-content-between mb-2" style="position:absolute; bottom: 0;">
+                    <a href="#" class="btn btn-primary col-4">Pinjam</a>
+                    @if(Context.Session.GetString("Role") == "Admin"){
+                    @:<div class="btn-group col-8" role="group" aria-label="Basic outlined example">
+                        @Html.ActionLink("", "Edit", "Books", new { id = item._id  }, new { @class="btn btn-def btn-outline-primary bi bi-pencil-square" })
+                        @Html.ActionLink("", "Details", "Books", new { id = item._id  }, new { @class="btn btn-def btn-outline-primary bi bi-book" })
+                        @Html.ActionLink("", "Delete", "Books", new { _id = item._id  }, new { @class="btn btn-def btn-outline-danger bi bi-trash3 text-red", @style=":hover { color: #fff !important;}" })      
+                    @:</div>
+                    }
+                </div>
                     
-                  </div>
                 </div>
             </div>
+        </div>     
+}
         @*<tr>
             <td>
                 @Html.DisplayFor(modelItem => item._id)
@@ -99,6 +121,5 @@
                 @Html.ActionLink("Delete", "Delete", new { judul = item.Judul, id = item._id  })
             </td>
         </tr>*@
-}       </div>
     </div>
 @*</table>*@

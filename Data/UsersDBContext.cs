@@ -19,7 +19,7 @@ namespace OnlineLibrary.Data
 
         public Users GetUserDetails(string NIS)
         {
-            throw new NotImplementedException();
+            return UsersCollection.Find(user => user.NIS == NIS).FirstOrDefault();
         }
 
         public void Register(Users user)
@@ -27,9 +27,16 @@ namespace OnlineLibrary.Data
             UsersCollection.InsertOne(user);
         }
 
-        public void update(string NIS, Users book)
+        public void update(string NIS, Users user)
         {
-            throw new NotImplementedException();
+            var Filter = Builders<Users>.Filter.Eq("NIS", NIS);
+            var Update = Builders<Users>.Update
+                .Set("NIS", user.NIS)
+                .Set("Nama", user.Nama)
+                .Set("Jurusan", user.Jurusan)
+                .Set("Kelas", user.Kelas)
+                .Set("Password", user.Password);
+            UsersCollection.UpdateOne(Filter, Update);
         }
 
         public Users UserLogin(string NIS, string password)
@@ -38,9 +45,16 @@ namespace OnlineLibrary.Data
             var user = UsersCollection.Find(user => user.NIS == NIS & user.Password == password).FirstOrDefault();
             return user;
         }
-        public void userorderbooks(string NIS, string BookId)
+        public void userorderbooks(string NIS, string RentBookId)
         {
-            throw new NotImplementedException();
+            var update = Builders<Users>.Update.Push(user => user.DaftarPeminjaman, RentBookId);
+            UsersCollection.UpdateOne(user => user.NIS == NIS, update);
+        }
+
+        public string[] showuserbookorder(string NIS)
+        {
+            var listorder = UsersCollection.Find(user => user.NIS == NIS).FirstOrDefault().DaftarPeminjaman;
+            return listorder;
         }
     }
 }

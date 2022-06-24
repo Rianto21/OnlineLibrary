@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Options;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using OnlineLibrary.Interfaces;
 using OnlineLibrary.Models;
@@ -21,9 +22,10 @@ namespace OnlineLibrary.Data
             return BooksCollection.Find(a => true).ToList();
         }
 
-        public Books GetBookDetails(string judul)
+        public Books GetBookDetails(string id)
         {
-            var Book = BooksCollection.Find(b => b.Judul == judul).FirstOrDefault();
+            var Filter = Builders<Books>.Filter.Eq("_id", ObjectId.Parse(id));
+            var Book = BooksCollection.Find(Filter).FirstOrDefault();
             return Book;
         }
 
@@ -34,7 +36,7 @@ namespace OnlineLibrary.Data
 
         public void update(string id, Books book)
         {
-            var Filter = Builders<Books>.Filter.Eq( c => c._id, id);
+            var Filter = Builders<Books>.Filter.Eq("_id", ObjectId.Parse(id));
             var Update = Builders<Books>.Update
                 .Set("Judul", book.Judul)
                 .Set("Penulis", book.Penulis)
@@ -47,7 +49,7 @@ namespace OnlineLibrary.Data
 
         public void delete(string id)
         {
-            var Filter = Builders<Books>.Filter.Eq( c => c._id, id);
+            var Filter = Builders<Books>.Filter.Eq("_id", ObjectId.Parse(id));
             BooksCollection.DeleteOne(Filter);
         }
 

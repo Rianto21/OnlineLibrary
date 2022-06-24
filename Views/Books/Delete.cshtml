@@ -12,12 +12,6 @@
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model._id)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model._id)
-        </dd>
-        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Judul)
         </dt>
         <dd class = "col-sm-10">
@@ -56,6 +50,7 @@
     </dl>
     
     <form asp-action="DeleteBooks">
+        <input type="hidden" asp-for="_id" class="form-control"/>
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-action="Index">Back to List</a>
     </form>

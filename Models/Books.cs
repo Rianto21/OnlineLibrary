@@ -8,12 +8,12 @@ namespace OnlineLibrary.Models
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public string? _id { get; }
+        public string? _id { get; set; }
         public string Judul { get; set; }
         public DateTime TanggalTerbit { get; set; }
         public string Kategori { get; set; }
         public string Penulis { get; set; }
-        public int Penerbit { get; set; }
+        public string Penerbit { get; set; }
         public Boolean StatusKetersediaan { get; set; }
 
 

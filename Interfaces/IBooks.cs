@@ -1,4 +1,5 @@
-﻿using MongoDB.Driver;
+﻿using MongoDB.Bson;
+using MongoDB.Driver;
 using OnlineLibrary.Models;
 
 namespace OnlineLibrary.Interfaces
@@ -7,7 +8,7 @@ namespace OnlineLibrary.Interfaces
     {
         IMongoCollection<Books> BooksCollection { get; }
         IEnumerable<Books> GetAllBooks();
-        Books GetBookDetails(string judul);
+        Books GetBookDetails(string id);
         void create(Books book);
         void update(string id, Books book);
         void delete(string id);

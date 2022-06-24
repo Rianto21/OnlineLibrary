@@ -7,8 +7,12 @@ namespace OnlineLibrary.Models
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public string? _id { get; }
-        public string BooksId { get; set; }
+        public string? _id { get; set; }
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string? BooksId { get; set; }
+        public string NISPeminjam { get; set; }
+        public string JudulBuku { get; set; }
         public DateTime TanggalPeminjaman { get; set; } = DateTime.Now;
         public DateTime TenggatPengembalian { get; set; } = DateTime.Now.AddDays(7);
         public Pengembalian Pengembalian { get; set; }

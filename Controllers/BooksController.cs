@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using OnlineLibrary.Interfaces;
 using OnlineLibrary.Models;
+using MongoDB.Bson;
 
 namespace OnlineLibrary.Controllers
 {
@@ -35,36 +36,36 @@ namespace OnlineLibrary.Controllers
         }
 
         [HttpGet]
-        public IActionResult Edit(string judul)
+        public IActionResult Edit(string id)
         {
-            var data = _context.GetBookDetails(judul);
+            var data = _context.GetBookDetails(id);
             return View(data);
         }
 
         [HttpPost]
-        public IActionResult EditBooks(string id,Books book)
+        public IActionResult EditBooks(string _id,Books book)
         {
-            _context.update(id, book);
+            _context.update(_id, book);
             return RedirectToAction("Index");
         }
 
         [HttpGet]
-        public IActionResult Details(string judul)
+        public IActionResult Details(string id)
         {
-            var data = _context.GetBookDetails(judul);
+            var data = _context.GetBookDetails(id);
             return View(data);
         }
 
         [HttpGet]
-        public IActionResult Delete(string judul)
+        public IActionResult Delete(string _id)
         {
-            var data = _context.GetBookDetails(judul);
+            var data = _context.GetBookDetails(_id);
             return View(data);
         }
         [HttpPost]
-        public IActionResult DeleteBooks(string judul)
+        public IActionResult DeleteBooks(string _id)
         {
-            _context.delete(judul);
+            _context.delete(_id);
             return RedirectToAction("Index");
         }
 

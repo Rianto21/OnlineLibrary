@@ -16,7 +16,7 @@ namespace OnlineLibrary.Models
         public string NIS { get; set; }
         public string Kelas { get; set; }
         public string Jurusan { get; set; }
-        public string Role { get; }
+        public string Role { get; set; } = "Siswa";
         public string[] DaftarPeminjaman { get; set; } = Array.Empty<String>();
     }
 }

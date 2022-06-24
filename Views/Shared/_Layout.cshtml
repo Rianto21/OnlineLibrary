@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -31,8 +32,19 @@
                         </li>
                     </ul>
                 </div>
+                <div class="d-flex">
+                    @if(Context.Session.GetString("Nama") != null)
+                    {
+                        @Html.ActionLink( Context.Session.GetString("Nama"), "Index", "Users", new { NIS = Context.Session.GetString("NIS") }, new { @class="bi bi-person-circle", style="text-decoration: none; color: #0275d8"} )
+                        @Html.ActionLink("Logout", "Logout", "Users", null, new{ @class="btn btn-outline-danger mx-2" })
+                    }else {
+                        @Html.ActionLink("Login", "Login", "Users", null, new{ @class="btn btn-outline-danger mx-2" })
+                        @Html.ActionLink("Register", "Register", "Users", null, new{ @class="btn btn-outline-danger mx-2" })
+                    }
+                </div>
             </div>
         </nav>
+            
     </header>
     <div class="container">
         <main role="main" class="pb-3">

@@ -4,6 +4,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.Extensions.DependencyInjection;
 using OnlineLibrary.Interfaces;
 using OnlineLibrary.Models;
+
 //using MongoBookStoreApp.Contracts;
 //using OnlineLibrary.Models;
 
@@ -14,11 +15,11 @@ var settings = builder.Configuration.GetSection(nameof(Settings)).Get<Settings>(
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 builder.Services.AddScoped<IBooks, BooksDBContext>();
+builder.Services.AddScoped<IUsers, UsersDBContext>();
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
 {
-    options.Cookie.Name = "Login";
-    options.IdleTimeout = TimeSpan.FromMinutes(5);
+    options.IdleTimeout = TimeSpan.FromMinutes(10);
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });

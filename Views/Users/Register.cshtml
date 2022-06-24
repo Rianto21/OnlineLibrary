@@ -4,11 +4,46 @@
     ViewData["Title"] = "Register";
 }
 
-<h1>Register</h1>
 
-<h4>Users</h4>
-<hr />
-<div class="row">
+<div class="container">
+        <div class="row">
+            <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                <div class="card border-0 shadow rounded-3 my-5">
+                    <div class="card-body p-4 p-sm-5">
+                        <h5 class="card-title text-center mb-5">Selamat Datang,
+                            <p class="text-black-5 text-center mb-5">Daftarkan diri untuk menjadi anggota perpus</p></h5>
+                        
+                        <form asp-action="RegisterPost">
+                            <div class="form-floating mb-3">
+                                <input asp-for="NIS" type="text" class="form-control" placeholder="NIS">
+                                <label for="floatingPassword">Nomor Induk Siswa Telatan</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input asp-for="Password" type="password" class="form-control" placeholder="Password">
+                                <label for="floatingPassword">Kata Sandi</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input asp-for="Nama" type="text" class="form-control" placeholder="NamaLengkap">
+                                <label for="floatingInput">Nama Lengkap</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input asp-for="Jurusan" type="text" class="form-control" placeholder="Jurusan">
+                                <label for="floatingInput">Jurusan</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input asp-for="Kelas" type="text" class="form-control" placeholder="Jurusan">
+                                <label for="floatingInput">Kelas</label>
+                            </div>
+                            <div class="d-grid">
+                                <input class="btn btn-primary btn-login text-uppercase fw-bold" value="Register" type="submit">Daftar</input>
+                            </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+@*<div class="row">
     <div class="col-md-4">
         <form asp-action="Register">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -52,10 +87,10 @@
             </div>
         </form>
     </div>
-</div>
+</div>*@
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index" asp-controller="Home">Urungkan</a>
 </div>
 
 @section Scripts {
