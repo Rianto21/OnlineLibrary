@@ -79,7 +79,12 @@
                         }
                     </p>
                 <div class="row w-100 justify-content-between mb-2" style="position:absolute; bottom: 0;">
-                    <a href="#" class="btn btn-primary col-4">Pinjam</a>
+                    @if(Context.Session.GetString("Nama") != null && item.StatusKetersediaan)
+                    {
+                        @Html.ActionLink("Pinjam", "pinjambuku", "RentBooks", new { bookId = item._id}, new { @class="btn btn-primary col-4"})        
+                    }else{
+                        @Html.ActionLink("Pinjam", "pinjambuku", "RentBooks", new { bookId = item._id}, new { @class="btn btn-secondary col-4 disabled"})      
+                    }
                     @if(Context.Session.GetString("Role") == "Admin"){
                     @:<div class="btn-group col-8" role="group" aria-label="Basic outlined example">
                         @Html.ActionLink("", "Edit", "Books", new { id = item._id  }, new { @class="btn btn-def btn-outline-primary bi bi-pencil-square" })

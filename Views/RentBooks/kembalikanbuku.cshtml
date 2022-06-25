@@ -1,0 +1,83 @@
+﻿@model dynamic;
+@using OnlineLibrary.Models;
+
+@{
+    ViewData["Title"] = "pinjambuku";
+}
+
+<h2>Peminjaman Buku</h2>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-3">
+            Judul:
+        </dt>
+        <dd class = "col-sm-9">
+            @Model.Books.Judul
+        </dd>
+        <dt class = "col-sm-3">
+            Tanggal Terbit:
+        </dt>
+        <dd class = "col-sm-9">
+            @Model.Books.TanggalTerbit
+        </dd>
+        <dt class = "col-sm-3">
+            Kategori:
+        </dt>
+        <dd class = "col-sm-9">
+            @Model.Books.Kategori
+        </dd>
+        <dt class = "col-sm-3">
+            Penulis:
+        </dt>
+        <dd class = "col-sm-9">
+            @Model.Books.Penulis
+        </dd>
+        <dt class = "col-sm-3">
+            Penerbit:
+        </dt>
+        <dd class = "col-sm-9">
+            @Model.Books.Penerbit
+        </dd>
+        <dt class = "col-sm-3">
+            Status Ketersediaan:
+        </dt>
+        <dd class = "col-sm-9">
+            @Model.Books.StatusKetersediaan
+        </dd>
+        <dt class = "col-sm-3">
+            Tanggal Peminjaman: 
+        </dt>
+        <dd class = "col-sm-9">
+            @Model.RentBooks.TanggalPeminjaman.ToString("dd-MM-yyyy")
+        </dd>
+        <dt class = "col-sm-3">
+            Tenggat Pengembalian: 
+        </dt>
+        <dd class = "col-sm-9">
+            @Model.RentBooks.TenggatPengembalian.ToString("dd-MM-yyyy")
+        </dd>
+        <dt class = "col-sm-3">
+            Tanggal Hari Ini: 
+        </dt>
+        <dd class = "col-sm-9">
+            @{var x = (int)(DateTime.Now - Model.RentBooks.TenggatPengembalian).TotalDays ;}
+            @if((int)(DateTime.Now - Model.RentBooks.TenggatPengembalian).TotalDays > 0)
+            {
+                @:<p class="text-danger"> @DateTime.Now.ToString("dd-MM-yyyy") </p>
+            }else
+            {
+                @:<p class="text-success"> @DateTime.Now.ToString("dd-MM-yyyy") </p>
+            }
+        </dd>
+    </dl>
+</div>
+<div>
+    <form  asp-action="kembalikanbukuPost" asp-controller="RentBooks">
+         <input type="hidden" name="rentid" value="@Model.RentBooks._id" class="form-control"/>
+         <input type="hidden" name="NIS" value="@Model.RentBooks.NISPeminjam" class="form-control"/>
+         <input type="submit" value="Kembalikan Buku" class="btn btn-success me-2" />
+         @Html.ActionLink("Batal", "Index", "Books", null, new { @class="btn btn-danger mx-2" })
+    </form>
+</div>

@@ -1,0 +1,59 @@
+﻿@model IEnumerable<OnlineLibrary.Models.RentBooks>
+
+@{
+    ViewData["Title"] = "daftarPeminjaman";
+}
+
+<h2>daftarPeminjaman</h2>
+<table class="table table-bordered border-white table-info table-striped text-center">
+    <thead class="table-dark  border-white">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.JudulBuku)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TanggalPeminjaman)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TenggatPengembalian)
+            </th>
+            <th>
+                kembalikan
+            </th>
+            <th>
+                Denda
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr class="align-middle">
+            <td  >
+                @Html.DisplayFor(modelItem => item.JudulBuku)
+            </td>
+            <td >
+                @Html.DisplayFor(modelItem => item.TanggalPeminjaman)
+            </td>
+            <td >
+                @Html.DisplayFor(modelItem => item.TenggatPengembalian)
+            </td>
+            <td >
+                @if (!item.Pengembalian.StatusPengembalian)
+                {
+                    @Html.ActionLink("Kembalikan", "kembalikanbuku", "RentBooks", new { rentid = item._id }, new { @class="btn btn-outline-success m-auto"})
+                }else {
+                     @Html.ActionLink("Kembalikan", "kembalikanbuku", "RentBooks", null, new { @class="btn btn-secondary disabled text-center"})
+                }
+            </td>
+            <td>
+                @if (item.Pengembalian.StatusPengembalian)
+                {
+                    @Html.DisplayFor(modelItem => item.Pengembalian.NominalDenda)
+                }else {
+                    @:None 
+                }
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

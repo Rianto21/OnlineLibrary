@@ -16,6 +16,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 builder.Services.AddScoped<IBooks, BooksDBContext>();
 builder.Services.AddScoped<IUsers, UsersDBContext>();
+builder.Services.AddScoped<IRentBooks, RentBooksDBContext>();
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
 {

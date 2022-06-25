@@ -1,0 +1,72 @@
+﻿@model dynamic;
+@using OnlineLibrary.Models;
+
+@{
+    ViewData["Title"] = "pinjambuku";
+}
+
+<h2>Peminjaman Buku</h2>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-3">
+            Judul:
+        </dt>
+        <dd class = "col-sm-9">
+            @Model.Books.Judul
+        </dd>
+        <dt class = "col-sm-3">
+            Tanggal Terbit:
+        </dt>
+        <dd class = "col-sm-9">
+            @Model.Books.TanggalTerbit
+        </dd>
+        <dt class = "col-sm-3">
+            Kategori:
+        </dt>
+        <dd class = "col-sm-9">
+            @Model.Books.Kategori
+        </dd>
+        <dt class = "col-sm-3">
+            Penulis:
+        </dt>
+        <dd class = "col-sm-9">
+            @Model.Books.Penulis
+        </dd>
+        <dt class = "col-sm-3">
+            Penerbit:
+        </dt>
+        <dd class = "col-sm-9">
+            @Model.Books.Penerbit
+        </dd>
+        <dt class = "col-sm-3">
+            Status Ketersediaan:
+        </dt>
+        <dd class = "col-sm-9">
+            @Model.Books.StatusKetersediaan
+        </dd>
+        <dt class = "col-sm-3">
+            Tanggal Peminjaman: 
+        </dt>
+        <dd class = "col-sm-9">
+            @Model.RentBooks.TanggalPeminjaman
+        </dd>
+        <dt class = "col-sm-3">
+            Tenggat Pengembalian: 
+        </dt>
+        <dd class = "col-sm-9">
+            @Model.RentBooks.TenggatPengembalian
+        </dd>
+    </dl>
+</div
+
+<div class="row">
+    <form  asp-action="pinjambukuPost" asp-controller="RentBooks">
+         <input type="hidden" name="NIS" value="@Model.RentBooks.NISPeminjam" class="form-control"/>
+         <input type="hidden" name="bookId" value="@Model.Books._id" class="form-control"/>
+         <input type="submit" value="pinjambukuPost" class="btn btn-success me-2" />
+         @Html.ActionLink("Batal", "Index", "Books", null, new { @class="btn btn-danger mx-2" })
+    </form>
+@*    @Html.ActionLink("Konfirmasi Peminjaman", "pinjambukuPost", "RentBooks", new { NIS = Model.RentBooks.NISPeminjam, bookId = Model.Books._id  }, new { @class="btn btn-success me-2" })*@
+</div>

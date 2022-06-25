@@ -6,13 +6,11 @@ namespace OnlineLibrary.Interfaces
 {
     public interface IRentBooks
     {
-        IMongoCollection<RentBooks> BooksCollection { get; }
-        IEnumerable<RentBooks> GetAllRentBook();
-        IEnumerable<RentBooks> GetListRentBook(string[] listid);
-        Books GetBookDetails(string id);
-        void create(Books book);
-        void update(string id, Books book);
-        void delete(string id);
+        IMongoCollection<RentBooks> RentBooksCollection { get; }
+        IEnumerable<RentBooks> GetAllRentBooks();
+        IEnumerable<RentBooks> GetUserRentBooks(string userId);
+        RentBooks GetRentBookDetails(string id);
+        void pinjam(RentBooks rentbook, string NIS, string BookId);
+        void kembali(string id);
     }
-}
 }
